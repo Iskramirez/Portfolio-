@@ -1,0 +1,149 @@
+# NY Times API address
+baseurl="http://api.nytimes.com/svc/search/v2/articlesearch.json"
+
+# API request parameters (you need to get your own API key)
+# which you can get by registering on the NY Times developer 
+# web site: http://developer.nytimes.com/
+key="f09e1847a5ac0fba8b268d04cb5ba9f8:4:69818692"
+year=$1
+query="Drugs"
+begin_date=$year'0101'
+end_date=$year'1231'
+page=0
+
+# construct the complete request
+requestUrl="$baseurl?q=$query&begin_date=$begin_date&end_date=$end_date&api-key=$key&page=$page"
+
+# get first results page and extract total number of results/hits
+hits=`curl -s $requestUrl | jq '.response.meta.hits'`
+
+# The NY Times API returns 10 results per request
+# The number of hits divided by 10 gives the number
+# of requests we have to make to get all results
+totalRequests=hits/10
+
+# Iteratively download all the requests
+for ((page=0; page<$totalRequests; page++))
+do
+	# construct request URL while iterating over paging
+	requestUrl="$baseurl?q=$query&begin_date=$begin_date&end_date=$end_date&api-key=$key&page=$page"
+
+	# get results and extract individual article metadata
+	# from the response JSON
+	curl -s $requestUrl | jq -c '.response.docs[]'
+
+	# wait 0.2 seconds between request to not overload the server
+	sleep 0.2
+done
+
+# Per year, 80 somewhat in total, we had to perform this crawl: sh crawl_drugs.sh 1995 > Drugs1995.csv 
+# Years that gave more than 1010 hits were split into a half or four parts
+# The command would look like this: sh crawl_drugs1vierde.sh 2003 > Drugs2003kwart.csv for each individual part of the year
+
+
+
+
+
+
+
+
+
+# NY Times API address
+baseurl="http://api.nytimes.com/svc/search/v2/articlesearch.json"
+
+# API request parameters (you need to get your own API key)
+# which you can get by registering on the NY Times developer 
+# web site: http://developer.nytimes.com/
+key="f09e1847a5ac0fba8b268d04cb5ba9f8:4:69818692"
+year=$1
+query="Drugs"
+begin_date=$year'0601'
+end_date=$year'0831'
+page=0
+
+# construct the complete request
+requestUrl="$baseurl?q=$query&begin_date=$begin_date&end_date=$end_date&api-key=$key&page=$page"
+
+# get first results page and extract total number of results/hits
+hits=`curl -s $requestUrl | jq '.response.meta.hits'`
+
+# The NY Times API returns 10 results per request
+# The number of hits divided by 10 gives the number
+# of requests we have to make to get all results
+totalRequests=hits/10
+
+# Iteratively download all the requests
+for ((page=0; page<$totalRequests; page++))
+do
+	# construct request URL while iterating over paging
+	requestUrl="$baseurl?q=$query&begin_date=$begin_date&end_date=$end_date&api-key=$key&page=$page"
+
+	# get results and extract individual article metadata
+	# from the response JSON
+	curl -s $requestUrl | jq -c '.response.docs[]'
+
+	# wait 0.2 seconds between request to not overload the server
+	sleep 0.2
+done
+	
+
+
+
+
+
+
+
+
+
+# Verdelen van de verschillende secties in de artikelen in logische volgorde
+# Overzichtelijker en toegankelijker voor ons en het gebruik van de vervolgscripts
+# json2csv was nodig om onze database, bestaande uit json, te kunnen gebruiken
+
+./json2csv –I drugsdatabase.csv –d ‘ ‘ –k pub_date, snippet, headline.mainweb, abstract, web_url
+
+
+
+
+
+
+
+# Om overzicht te krijgen en visuele ondersteuning mogelijk te maken
+# Frequentie search in sectie 1 (print $1) om de hoeveelheid artikelen per jaar weer te geven
+# drugssection2.csv is de naam van het bestand waar de sectionscsv.sh in is gezet
+
+cat drugssection2.csv | awk –F ‘\t’ ‘{print $1}’ | sed –E ‘s/-.*//’ | sort –g | uniq –c
+
+
+
+
+
+
+# Hoe vaak wordt 'cocaine' genoemd per jaar? 
+# Met 'uniq -c' worden meerdere mentionings van cocaine per artikel als 1 hit gerekend
+# grep functie zoekt naar het word cocaine
+# drugssection1.csv is een resultaat van een variant op sectionscsv.sh (waarin de volgorde van de pub_date, snippet, etc. iets anders is dan de uiteindelijke sectionscsv.sh)
+
+cat drugssection1.csv | grep cocaine | awk –F ‘\t’ ‘{print $1}’ | sed –E ‘s/-.*//’ | sort –g | uniq –c
+
+
+
+
+
+
+# Zelfde script als Grep_cocaine.sh, maar cocaine in crack veranderd
+# Kijken of 'crack' dezelfde pieken en dalen weergeeft als 'cocaine'
+
+cat drugssection1.csv | grep crack | awk –F ‘\t’ ‘{print $1}’ | sed –E ‘s/-.*//’ | sort –g | uniq –c
+
+
+
+
+
+# Per section (Arts, Economy, Sports) van de New York Times (print $2) gekeken naar de frequentie van 'cocaine'
+# Welke secties springen eruit en tonen de interessantste pieken?
+
+cat drugssection2.csv | grep cocaine | awk –F ‘\t’ ‘{print $2}’ | sed –E ‘s/-.*//’ | sort –g | uniq –c 
+
+
+
+
