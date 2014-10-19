@@ -1,0 +1,104 @@
+Table of Contents
+
+Chapter 1: Introduction	2
+Chapter 2: Approach	3
+Step 1: Creating our own database	3
+Step 2: Discussing what this new database meant	3
+Step 3: Keyword search for ‘cocaine’ and ‘crack’ through our database	4
+Step 4: Making our own scripts	4
+Step 5: Interpreting results and visualizing these results	4
+Chapter 3: Findings and Conclusion	5
+Findings	5
+Conclusion	8
+Chapter 4: Reflections	9
+
+
+Chapter 1: Introduction
+
+The guideline of this project is a fusion between a rather specific subject from a proposal and the general direction of a vague plan of action. The subject being drugs, the war on drugs and related issues, the general wish was to make a project that had a progressional aspect through time, meaning with history in mind. The original question went as follows: How does the frequency of drug related terms change trough time in the nytimes paper. This changed as required. An extensive list followed with many drugs, categories emerged; recreational, medical, and the issue of legality and illegality came up. This proved to be too broad and difficult for our very limited set of skills. The research question was then narrowed down to focus only on ‘cocaine’. From previous research done by a group member it was evident that cocaine had the most interesting and recorded history. Before starting with the actual research we made use of Google’s Ngram viewer to consult some of the keywords to be searched in the NYtimes database. 
+As humanities was understood during discussions in this course, it seems to be that which humans produce, such as arts, media, music, literature. Any aspect of life or phenomena if popular enough will be discussed and if it is discussed it will be written about in books, papers and other media. In every culture and society there are taboos, these taboos change through time and social spheres. Something could be quite popular at a point, but it could be forbidden or frown upon. 
+This is how the humanities side of this project was reconciled with the digital tools we were using. Checking the popularity of drugs in books as a starter point or a baseline. A pointer of the popularity of a certain keyword, using nytimes demographic as a sample of the American population. 
+What follows is a short report on the implementation of these ideas into practical digital tools. Starting with the approach taken, followed by some interesting findings and conclusion, and ending with a short reflection on lessons learned.       
+
+Chapter 2: Approach
+
+In this section of the portfolio we will show you chronologically, which steps we took to get the answer on the question: How does the frequency of drug related terms (cocaine and crack) change through time in the New York Times API? Our research resembles a tree that starts at the root (learning how to use specific commands) and ends at the top (conclusion). 
+The five steps we took:
+1)	Creating our own database
+2)	Discussing what this new database meant 
+3)	Keyword search for ‘cocaine’ and ‘crack’ through our database
+4)	Making our own scripts
+5)	Interpreting results and visualizing these results
+
+Step 1: Creating our own database
+
+The first step was to discuss how to narrow down the question. Searching for the frequency of all drug related terms was too broad and time-consuming, it was decided to narrow down the research to cocaine and if there was time to spare, search also for ‘crack’. 
+To achieve this we would manually build our own data set by filtering the nytimes API into a dataset that contains the word ‘Drugs’ somewhere in the metadata 
+The first problem we encountered was the limit of hits the search query from the nytimes API would allow, it would stop automatically at 1000 hits. We checked the amount of hits the search query drugs would extract per year with the nytimes online API console. With the amount of hits per year we adjusted the scripts accordingly, the modified script is in the script document. Script used to crawl through the API (crawl_drugs)*.
+It was important for each member to understand thoroughly the scripts we had to use and the mere act of learning to use and modify them took most of the time spend in the course. The Ngram viewer and previous research made by a member of the group confirmed that both the word ‘drugs’ and ‘cocaine’ had a rise in popularity in the last century. To make tasks easier we took a span of 80 years whereby each member took 20 years to extract manually with the command. As the years progressed the amount of total articles the NY times paper produces per year increases dramatically, particularly in the last few decades. The scripts had to be modified to not just search for the whole year, but to split the year in several months in order to get all the desired articles.( crawl_drugs3vierde)*  Sometimes splitting a year into 5 or 6 different scripts per year. The individual data pooled together into a single file became our own created database.
+Step 2: Discussing what this new database meant
+
+Having a critical view on your own collected data and research is important for the relevance of the results. After completion of our database, a proper understanding of this ‘new database’ is needed in order to extract reliable and relevant information from it. We understood the constraints and borders of our own data set, as our data set only contains articles with the keyword drugs in the metadata, any further analysis in that data set was constrained by the scope of this.
+
+Step 3: Keyword search for ‘cocaine’ and ‘crack’ through our database
+
+With the merged data in one file more interesting commands could be used to find patterns in keyword usage. Before doing this, it was necessary to install Json2Csv program in order to extract the required information into a clear csv file that could be read easily. We chose certain fields that were relevant for our purposes.  Such as pub_date, section_name, type_of_material,headline, absctract (sectionscsv)*. With the script: lab1_digital_year_distribution.html  a search for the keywords ‘cocaine’ and later ‘crack’ was possible. (Articles_per_year_drugs)*
+Step 4: Making our own scripts
+
+With the established ‘drugs’ dataset the next step is to make our own scripts for searching and working within our dataset. The compromise was made to focus on two points.
+* A script that we could use to search for the frequency of certain keywords (crack, cocaine)
+* Frequency of a certain drug per ‘section_name’ of the nytimes paper 
+The decision was made at the beginning of the research not to be so ambitious as to research all drug related terms, and focus on ‘cocaine’. (Grep_cocaine)
+‘Crack’ is a variety of cocaine, these drugs have something in common and as we had very little time to spare, some search went into this one as well.  One of the main purposes in the research was to be critical, in order to do good research in the future, knowing and using all synonyms for a specific drug is crucial for the proper comprehension of what these numbers mean. (Grep_crack)
+Step 5: Interpreting results and visualizing these results
+
+The numbers collected with the commands on frequency of keywords was piped with $cat into separate .txt files that were used to make some simple visualizations on excel. (Sections_frequency & ) With the numbers in clear graphs it was easier to see rises and falls in the numbers across the years. 
+The method used was to study the graphs, criticise peaks and declines per year, and interpret strange movements in the graphs. Outstanding years were noted and it was originally planned to do some close reading with the help of the url field, unfortunately it was not possible to do any close reading in the few days between the last group session and the presentation, therefore we opted to do some secondary reading in order to base assumptions made on the most particular years.  
+
+Chapter 3: Findings and Conclusion
+
+Findings
+
+We had a bunch of interesting findings after we looked at the data and the graphs we produced and compared them with drugs related events in American history. 
+Percentage of drugs related articles in the NYT throughout the years
+
+When we look at the graph we made that shows the percentage of drugs related articles in the New York Times throughout the years (See image above), the most important of our findings, in chronological order, were:
+1969 – Operation Intercept: a massive effort to block marijuana from entering the United Stated from Mexico. We can see a large peak in the graph here, indicating that the media's reaction to this was quite strong.
+1973 – President Nixon created the DEA (Drug Enforcement Agency). The popularity of drugs articles drops greatly around this time. Possibly because drugs may have become a taboo subject, not to be discussed in the social media at the time (papers).
+1974-1984 – Not a lot seems to be happening during this period. However, there were a lot of events related to cocaine and we will show later on how that influenced our findings on 'cocaine' specifically.
+1988 – American politicians enforce new drug laws, reasoning (without evidence) that crack cocaine is 100 times more addictive than regular cocaine and, as such, the punishment for owning it also increased a hundredfold. Since crack cocaine was more popular for drug users of African American descent in poor neighbourhoods and regular cocaine on the other hand was more popular with middle and upper class Caucasian drug users this new law sparked a huge controversy. After all, crack cocaine and regular cocaine are in essence the same drug therefor this lseemed very much like the new laws were targeting black people.
+1993 – Pablo Escobar, kingpin of the Cartel, was killed by Columbian police. This may declare the sudden dip in drugs popularity, since it may have hurt the Cartel's drugs production. Less drug production and import to the states means decrease in drug usage and possibly popularity in news outlets. 
+Oddly, we haven't been able to find a specific cause for the big decrease in drugs popularity starting in 2003.
+
+We also wanted to use our very own drugs database to delve deeper into specific drugs and to do this, we chose to focus specifically on cocaine, since we knew this drug had an interesting history.
+The next graph shows the amount of articles containing 'cocaine' in our drugs database.
+Amount of articles containing 'cocaine' per year in our database
+
+This graph isn't completely reliable since it doesn't show the percentage of articles rather the amount, but there are still some peaks we can declare:
+-1981 Pablo Escobar's Medellin Cartel rises to dominate the Colombian cocaine trafficking industry. We see the popularity of cocaine increase immensely here.
+The big drop in popularity at 1988 doesn't make any sense since the media was very hysteric about crack cocaine at the time. It's very possible that it is an error in our database.
+-1993 Again, we can see the popularity of the drug decrease when Pablo Escobar was killed. 
+-2007 to 2012 Statistics says that the popularity of cocaine has decreased during this period. We can recognize this in the graph up untill 2010, but then the popularity seems to increase. Again, this could be because of improper data.
+
+We also wanted to see if there would be any interesting findings if we also looked into the popularity of crack cocaine in specific. This graph is somewhat similar to the 'cocaine' graph.
+Amount of articles containing 'crack' per year in our database
+
+Whenever 'cocaine' rose in popularity, 'crack' would also rise in popularity and vice-versa. It is unfortunate that 'regular cocaine' didn't have it's own name like crack had, because this made it impossible for us to really find out about the difference in popularity between the two variants. After all, 'crack' articles probably also contain the word 'cocaine', so this made the specific search on 'crack' a bit trivial.
+There is, however, one point in time where 'crack' suddenly becomes much more popular than 'cocaine'. This is in the period between 2004 and 2007. This is quite odd and we are unable to link it to any historic events.
+
+
+Finally, we decided to take a look at how the articles relating to cocaine in our database were divided into sections (see image below). This doesn't show a lot of surprising information, but it does show us that we need to keep in mind that the NY Times focuses much more on New York itself than on the rest of the world. It's also pretty interesting that 'sports' was a pretty popular section for cocaine related articles. This may have had to do with the fact that the crack hysteria around 1986 was primarily caused by the death of a famous basketballer who died to a cocaine overdose. Top athletes are also the ones what are more vulnerable to drugs like cocaine and crack, because of their way of life, and vulnerable to the press writing about them. Americans love drama and scandals, so our guess would be that the Sports section has more to write about then f. e. the section ‘Books’. 
+
+Division of articles containing the word 'cocaine' in our New York Times database.
+
+Conclusion 
+
+In the end, we can conclude that the NY Times' interest in drugs is somewhat coherent to the public interest in it; more drugs users often leads directly to more drugs related articles. We can also say that this is the case for cocaine specifically, and possibly also for other specific drugs. However, it is very tricky to use this method of research on drugs that use different names for different forms of the drug.
+
+
+Chapter 4: Reflections
+
+One of our main purposes was to be critical of our own use of the data, the most important revelation was the importance of specificity. In the event of future research, in order to do proper interpretations it is imperative to know all the synonyms and varieties of for example a certain drug. When working with keywords, spelling, grammar and synonyms are extremely important, words and meanings change through time as well. 
+Maybe this was the most interesting and important task, in a research an abundance of self-criticism is never a bad thing. 
+As for the group members, most of us were introduced into the world of digital work with this course, so our focus in this short project was that every member of the group knew each step of the way properly and completely. It was very important for us to understand the tools we were using, how to use them, the constraints and possibilities of our own newly acquired abilities. 
+As humanity students (history, media technologies and information etc.) this course was something completely new. We all discovered that behind simple computer commands there are processes we knew nothing about. It would be a lie to say that the technical part of the project (making and using scripts) wasn’t anything less than a challenge for us but the knowledge learned compensates the struggle. 
